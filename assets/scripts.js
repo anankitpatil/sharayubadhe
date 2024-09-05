@@ -7,4 +7,9 @@ jQuery(document).ready(function ($) {
       });
     })
     .scroll();
+  $(".mobile-menu").click(function (e) {
+    e.preventDefault();
+    $(this).toggleClass("open");
+    $(".sidebar").toggleClass("open");
+  });
 });

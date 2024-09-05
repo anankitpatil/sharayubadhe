@@ -38,11 +38,39 @@ body {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    align-items: center;
     padding: 30px 15px 0;
     z-index: 9999;
     a {
       color: var(--white);
       font-size: 24px;
+      text-transform: uppercase;
+    }
+    .mobile-menu {
+      z-index: 9999;
+      span {
+        display: block;
+        width: 32px;
+        height: 2px;
+        background: var(--black);
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+      }
+      &.open {
+        span {
+          &:first-child {
+            transform: rotate(45deg) translate(8.5px, 8.5px);
+          }
+          &:nth-child(2) {
+            opacity: 0;
+          }
+          &:last-child {
+            transform: rotate(-45deg) translate(8.5px, -8.5px);
+          }
+        }
+      }
     }
     &.page {
       position: relative;
@@ -77,12 +105,25 @@ body {
       }
     }
     &.page {
-      display: flex;
-      width: 100%;
-      gap: 30px;
+      @media screen and (min-width: 768px) {
+        width: 100%;
+        display: flex;
+        gap: 30px;
+      }
       padding: 0 15px;
       .sidebar {
-        min-width: 300px;
+        @media screen and (max-width: 768px) {
+          width: 100%;
+          max-height: 0vh;
+          overflow: hidden;
+          transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+          &.open {
+            max-height: 716px;
+          }
+        }
+        @media screen and (min-width: 768px) {
+          min-width: 300px;
+        }
         h3 {
           font-weight: 500;
           a {
@@ -109,7 +150,10 @@ body {
       }
       .page {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
+        @media screen and (min-width: 768px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
         gap: 30px;
         .one,
         .two {
@@ -159,6 +203,8 @@ body {
     padding: 0 15px 30px;
     a {
       color: var(--white);
+      font-size: 24px;
+      text-transform: uppercase;
     }
     &.page {
       position: relative;
